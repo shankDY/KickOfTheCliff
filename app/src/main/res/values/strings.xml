@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">KICK OFF THE CLIFF</string>
+    <string name="search_title">Search</string>
+    <string name="menu_item_offers">Наши предложения</string>
+    <string name="menu_item_landscape">Пейзажи</string>
+    <string name="menu_item_map">Все на карте</string>
+    <string name="view_navigation_open">Open</string>
+    <string name="view_navigation_close">Close</string>
+
+    <string name="tab_item_summer">Летний отдых</string>
+    <string name="tab_item_winter">Зимний отдых</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="action_settings">Settings</string>
+
+</resources>
