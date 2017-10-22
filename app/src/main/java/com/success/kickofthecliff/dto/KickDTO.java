@@ -9,13 +9,12 @@ public class KickDTO {
 
     @JsonProperty("id")//данная анатация говорит, как у нас называются колонки в data base
     private String id;
-    @JsonProperty("title")
-    private String title;
     @JsonProperty("info")
     private String kickInfo;
     @JsonProperty("photo")
     private String photo;
-
+    @JsonProperty("title")
+    private String title;
     //пустой конструктор
     public KickDTO() {
     }
@@ -30,14 +29,6 @@ public class KickDTO {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getKickInfo() {
@@ -55,4 +46,14 @@ public class KickDTO {
     public void setPhoto(String photo) {
         this.photo = photo;
     }
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+
+
 }

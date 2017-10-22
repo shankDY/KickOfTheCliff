@@ -15,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.success.kickofthecliff.adapter.TabsFragmentAdapter;
 import com.success.kickofthecliff.additional_classes.ScrollingActivity;
@@ -27,6 +28,11 @@ import org.springframework.web.client.RestTemplate;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+
 public class MainActivity extends AppCompatActivity {
 
     private static final int LAYOUT = R.layout.activity_main;
@@ -35,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private ViewPager viewPager;
     private TabsFragmentAdapter adapter;
+    List<KickDTO> kickDTO;
+    List<KickWinterDTO> winterDTO;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,9 +50,42 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(LAYOUT);
 
+        kickDTO = new ArrayList<>();
+        winterDTO = new ArrayList<>();
         initToolbar();
         initNavigationView();
         initTabs();
+
+
+        /*отображение данных*/
+        Rfit.getSummerApi().getSummerData().enqueue(new Callback<List<KickDTO>>() {
+            @Override
+            public void onResponse(Call<List<KickDTO>> call, Response<List<KickDTO>> response) {
+                kickDTO.addAll(response.body());
+                adapter.setData(kickDTO);//проставление данных в адаптер
+
+            }
+
+            @Override
+            public void onFailure(Call<List<KickDTO>> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "An error occurred during networking", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        Rfit.getSummerApi().getWinterData().enqueue(new Callback<List<KickWinterDTO>>() {
+            @Override
+            public void onResponse(Call<List<KickWinterDTO>> call, Response<List<KickWinterDTO>> response) {
+                winterDTO.addAll(response.body());
+                adapter.setDataWinter(winterDTO);//проставление данных в адаптер
+
+            }
+
+            @Override
+            public void onFailure(Call<List<KickWinterDTO>> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "An error occurred during networking", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     private void initToolbar() {//создание тулбара
@@ -64,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
         adapter = new TabsFragmentAdapter(this, getSupportFragmentManager());
         viewPager.setAdapter(adapter);
 
-        new KickTask().execute();//выполнение метода
+       // new KickTask().execute();//выполнение метода
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(viewPager);
@@ -82,47 +123,6 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-    }
-
-
-    private class KickTask extends AsyncTask<Void,KickWinterDTO , KickDTO[]> {//логика приложения
-
-        @Override
-        protected KickDTO[] doInBackground(Void... params) {
-
-            RestTemplate template = new RestTemplate();//общение с сервером!!!!
-            try{
-                template.getMessageConverters().add(new MappingJackson2HttpMessageConverter());//преобразование запросов
-                publishProgress(template.getForObject(Constants.URL.GET_KICK_ITEM2, KickWinterDTO[].class));
-                return template.getForObject(Constants.URL.GET_KICK_ITEM, KickDTO[].class);
-
-            }
-            catch (Exception e){
-                Log.e("MainActivity",e.getMessage(),e);//ловим ошибку в логах
-            }
-            return null;
-        }
-
-
-        @Override
-        protected void onPostExecute(KickDTO[] kickDTO) {//срабатывает после doInBackground
-            List<KickDTO> list = new ArrayList<>();//получение списка объектов с сервера
-            for(int i =0;i<kickDTO.length;i++) {
-                list.add(kickDTO[i]);
-            }
-            adapter.setData(list);//проставление данных в адаптер
-
-        }
-        @Override
-        protected void onProgressUpdate(KickWinterDTO... kickWinterDTOs) {
-            super.onProgressUpdate(kickWinterDTOs);
-            List<KickWinterDTO> list = new ArrayList<>();//получение списка объектов с сервера
-            for(int i =0;i<kickWinterDTOs.length;i++) {
-                list.add(kickWinterDTOs[i]);
-            }
-            adapter.setDataWinter(list);//проставление данных в адаптер
-
-        }
     }
 
     /*Метод для перехода и передачи данных на другое активити*/
@@ -143,6 +143,7 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("text", data.get(position).getWinter_kickInfo());
         context.startActivity(intent);
     }
+
 
 
 }
