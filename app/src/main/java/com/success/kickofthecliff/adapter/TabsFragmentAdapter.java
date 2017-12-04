@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.success.kickofthecliff.dto.KickDTO;
+import com.success.kickofthecliff.dto.KickSummerDTO;
 import com.success.kickofthecliff.dto.KickWinterDTO;
 import com.success.kickofthecliff.fragment.AbstractTabFragment;
 import com.success.kickofthecliff.fragment.SummerFragment;
@@ -25,7 +25,7 @@ public class TabsFragmentAdapter extends FragmentPagerAdapter {
     private SummerFragment summerFragment;
     private WinterFragment winterFragment;
 
-    private List<KickDTO> data;//данный для SummerFragment
+    private List<KickSummerDTO> data;//данный для SummerFragment
     private List<KickWinterDTO> dataWinter;//данный для WinterFragment
 
     public TabsFragmentAdapter(Context context, FragmentManager fm) {//конструктор
@@ -60,7 +60,7 @@ public class TabsFragmentAdapter extends FragmentPagerAdapter {
         tabs.put(1, winterFragment);
     }
 
-    public void setData(List<KickDTO> data) {
+    public void setData(List<KickSummerDTO> data) {
         this.data = data;
         summerFragment.refreshData(data);//обновление данных в фрагменте лето
     }

@@ -5,7 +5,7 @@ package com.success.kickofthecliff.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
-public class KickDTO {
+public class KickSummerDTO {
 
     @JsonProperty("id")//данная анатация говорит, как у нас называются колонки в data base
     private String id;
@@ -16,7 +16,7 @@ public class KickDTO {
     @JsonProperty("title")
     private String title;
     //пустой конструктор
-    public KickDTO() {
+    public KickSummerDTO() {
     }
 
 

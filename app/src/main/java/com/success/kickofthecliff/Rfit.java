@@ -2,14 +2,15 @@ package com.success.kickofthecliff;
 
 import android.app.Application;
 
-import com.success.kickofthecliff.dto.SummerApi;
+import com.success.kickofthecliff.dto.KickApi;
 
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 
 
 public class Rfit extends Application{
-    private static SummerApi summerApi;
+    private static KickApi kickApi;
     private Retrofit retrofit;
 
     @Override
@@ -18,15 +19,18 @@ public class Rfit extends Application{
 
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl("http://192.168.1.104:8080/") //Базовая часть адреса
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(JacksonConverterFactory.create()) //Конвертер, необходимый для преобразования JSON'а в объекты
+                    .baseUrl(Constants.URL.HOST) //Базовая часть адреса
                     .build();
-            summerApi = retrofit.create(SummerApi.class); //Создаем объект, при помощи которого будем выполнять запросы
+            kickApi = retrofit.create(KickApi.class); //Создаем объект, при помощи которого будем выполнять запросы
         }
+
+
     }
 
-    public static SummerApi getSummerApi() {
-        return summerApi;
+    public static KickApi getKickApi() {
+        return kickApi;
     }
 
 }

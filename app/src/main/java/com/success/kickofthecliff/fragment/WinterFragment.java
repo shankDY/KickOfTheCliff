@@ -10,11 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.success.kickofthecliff.R;
-import com.success.kickofthecliff.adapter.KickListAdapter;
 import com.success.kickofthecliff.adapter.KickListWinterAdapter;
-import com.success.kickofthecliff.dto.KickDTO;
 import com.success.kickofthecliff.dto.KickWinterDTO;
-import com.success.kickofthecliff.fragment.AbstractTabFragment;
 
 import java.util.List;
 

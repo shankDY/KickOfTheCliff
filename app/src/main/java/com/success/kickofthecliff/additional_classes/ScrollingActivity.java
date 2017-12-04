@@ -9,13 +9,17 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.success.kickofthecliff.R;
 import com.squareup.picasso.Picasso;
+import com.success.kickofthecliff.R;
+import com.success.kickofthecliff.dto.CoordinatesDTO;
+
+import java.util.List;
 
 public class ScrollingActivity extends AppCompatActivity implements View.OnClickListener{
     TextView textView;
     ImageView photo;
     Button button;
+    List<CoordinatesDTO> data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +50,11 @@ public class ScrollingActivity extends AppCompatActivity implements View.OnClick
                 .error(R.drawable.close_outline)
                 .into(photo);
 
+    }
+
+
+    public void setCoordinates(List<CoordinatesDTO> data){
+        this.data = data;
     }
 
     /*обработчик событий для кнопки*/

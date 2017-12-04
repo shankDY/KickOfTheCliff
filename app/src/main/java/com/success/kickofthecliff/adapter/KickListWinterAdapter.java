@@ -41,7 +41,7 @@ public class KickListWinterAdapter  extends RecyclerView.Adapter<KickListWinterA
         holder.title.setText(data.get(position).getWinter_title());
         holder.info.setText(data.get(position).getWinter_kickInfo());
 
-        String url = String.valueOf(data.get(position).getWinter_photo());//получаем ссылку из KickDTO
+        String url = String.valueOf(data.get(position).getWinter_photo());//получаем ссылку из KickSummerDTO
 
         //загрузка изображения в imageView с помощью библиотеки Picasso
         Picasso.with(holder.itemView.getContext())

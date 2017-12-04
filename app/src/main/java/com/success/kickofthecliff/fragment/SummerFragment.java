@@ -11,8 +11,7 @@ import android.view.ViewGroup;
 
 import com.success.kickofthecliff.R;
 import com.success.kickofthecliff.adapter.KickListAdapter;
-import com.success.kickofthecliff.dto.KickDTO;
-import com.success.kickofthecliff.fragment.AbstractTabFragment;
+import com.success.kickofthecliff.dto.KickSummerDTO;
 
 import java.util.List;
 
@@ -20,10 +19,10 @@ public class SummerFragment extends AbstractTabFragment {
 
     private static final int LAYOUT = R.layout.fragment_summer;
 
-    private List<KickDTO> data;//данные с сервера
+    private List<KickSummerDTO> data;//данные с сервера
     private KickListAdapter adapter;
 
-    public static SummerFragment getInstance(Context context, List<KickDTO> data){//получение экземпляра SummerFragment
+    public static SummerFragment getInstance(Context context, List<KickSummerDTO> data){//получение экземпляра SummerFragment
         Bundle args = new Bundle();
         SummerFragment fragment = new SummerFragment();
         fragment.setArguments(args);
@@ -50,11 +49,11 @@ public class SummerFragment extends AbstractTabFragment {
         this.context = context;
     }
 
-    public void setData(List<KickDTO> data) {
+    public void setData(List<KickSummerDTO> data) {
         this.data = data;
     }
 
-    public void refreshData(List<KickDTO> data){//обновляет данные, делает перерисовку
+    public void refreshData(List<KickSummerDTO> data){//обновляет данные, делает перерисовку
         adapter.setData(data);
         adapter.notifyDataSetChanged();
     }

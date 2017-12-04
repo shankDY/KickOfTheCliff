@@ -10,20 +10,19 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.success.kickofthecliff.MainActivity;
 import com.success.kickofthecliff.R;
-import com.success.kickofthecliff.dto.KickDTO;
-import com.success.kickofthecliff.dto.KickWinterDTO;
-import com.squareup.picasso.Picasso;
+import com.success.kickofthecliff.dto.KickSummerDTO;
 
 import java.util.List;
 
 public class KickListAdapter extends RecyclerView.Adapter<KickListAdapter.KickViewHolder>{
 
-    private static List<KickDTO> data;
+    private static List<KickSummerDTO> data;
 
 
-    public KickListAdapter(List<KickDTO> data) {//конструктор для получения данных
+    public KickListAdapter(List<KickSummerDTO> data) {//конструктор для получения данных
         this.data = data;
     }
 
@@ -39,7 +38,7 @@ public class KickListAdapter extends RecyclerView.Adapter<KickListAdapter.KickVi
         holder.title.setText(data.get(position).getTitle());
         holder.info.setText(data.get(position).getKickInfo());
 
-        String url = String.valueOf(data.get(position).getPhoto());//получаем ссылку из KickDTO
+        String url = String.valueOf(data.get(position).getPhoto());//получаем ссылку из KickSummerDTO
 
         //загрузка изображения в imageView с помощью библиотеки Picasso
         Picasso.with(holder.itemView.getContext())
@@ -81,7 +80,7 @@ public class KickListAdapter extends RecyclerView.Adapter<KickListAdapter.KickVi
         }
 
     }
-    public void setData(List<KickDTO> data) {//сеттер данных
+    public void setData(List<KickSummerDTO> data) {//сеттер данных
         this.data = data;
     }
 }
