@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
-import com.success.kickofthecliff.MainActivity;
+import com.success.kickofthecliff.BottomActivities.HomeActivity;
 import com.success.kickofthecliff.R;
 import com.success.kickofthecliff.dto.KickSummerDTO;
 
@@ -66,7 +66,7 @@ public class KickListAdapter extends RecyclerView.Adapter<KickListAdapter.KickVi
 
             cardView = (CardView) itemView.findViewById(R.id.cardView);
             title = (TextView) itemView.findViewById(R.id.title);
-            info = (TextView) itemView.findViewById(R.id.textInfo);
+           info = (TextView) itemView.findViewById(R.id.textInfo);
             imageView = (ImageView) itemView.findViewById(R.id.photo);
 
             cardView.setOnClickListener(this);
@@ -75,7 +75,7 @@ public class KickListAdapter extends RecyclerView.Adapter<KickListAdapter.KickVi
         //метод для взаимодействия с картами
         @Override
         public void onClick(View v) {
-            MainActivity.start(v.getContext(), getAdapterPosition(), data);//переход
+            HomeActivity.start(v.getContext(), getAdapterPosition(), data);//переход
             Log.d("RecyclerView", "Вы щёлкнули на позиции " + (getAdapterPosition() + 1));
         }
 

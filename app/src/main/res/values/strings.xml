@@ -13,5 +13,10 @@
     <string name="action_settings">Settings</string>
     <string name="action_share">SHARE</string>
     <string name="action_explore">FAVORITE</string>
+    <string name="title_activity_maps2">Map</string>
+    <string name="title_home">Домой</string>
+    <string name="title_landscape">Пейзажи</string>
+    <string name="title_favorite">Избранное</string>
+    <string name="title_about">О приложении</string>
 
 </resources>

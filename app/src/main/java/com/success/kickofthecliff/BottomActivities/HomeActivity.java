@@ -1,4 +1,4 @@
-package com.success.kickofthecliff;
+package com.success.kickofthecliff.BottomActivities;
 
 /** Главное активити**/
 
@@ -9,19 +9,18 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
+import com.success.kickofthecliff.R;
+import com.success.kickofthecliff.Rfit;
 import com.success.kickofthecliff.adapter.TabsFragmentAdapter;
 import com.success.kickofthecliff.additional_classes.ScrollingActivity;
 import com.success.kickofthecliff.dto.KickSummerDTO;
 import com.success.kickofthecliff.dto.KickWinterDTO;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,9 +30,20 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class MainActivity extends AppCompatActivity {
+public class HomeActivity extends BaseActivity {
 
-    private static final int LAYOUT = R.layout.activity_main;
+    private static final int LAYOUT = R.layout.activity_home;
+
+    @Override
+    int getContentViewId() {
+        return LAYOUT;
+    }
+
+    @Override
+    int getNavigationMenuItemId() {
+        return R.id.navigation_home;
+    }
+
 
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
@@ -47,25 +57,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         setTheme(R.style.AppDefault);
         super.onCreate(savedInstanceState);
-        setContentView(LAYOUT);
 
         kickSummerDTO = new ArrayList<>();
         winterDTO = new ArrayList<>();
         initToolbar();
-        initNavigationView();
         initTabs();
 
-
-        /*отображение данных ( не коректно работает. иногда случается перезагрузка приложения. )
-        Observable<List<KickSummerDTO>> sumer = Rfit.getKickApi().getSummerData();
-        sumer.subscribeOn(Schedulers.newThread())
-                //.observeOn(AndroidSchedulers.mainThread()) // говорим , что направляем новый поток в главный
-                .subscribe(kickSummerDTO -> {adapter.setData(kickSummerDTO);},Throwable::printStackTrace);
-
-        Observable<List<KickWinterDTO>> winter = Rfit.getKickApi().getWinterData();
-        winter.subscribeOn(Schedulers.newThread())
-                //.observeOn(AndroidSchedulers.mainThread())
-                .subscribe(winterDTO -> {adapter.setDataWinter(winterDTO);},Throwable::printStackTrace);*/
 
 
 
@@ -80,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<KickSummerDTO>> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "No internet connection", Toast.LENGTH_SHORT).show();
+                Toast.makeText(HomeActivity.this, "No internet connection", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -94,16 +91,16 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<KickWinterDTO>> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "No internet connection", Toast.LENGTH_SHORT).show();
+                Toast.makeText(HomeActivity.this, "No internet connection", Toast.LENGTH_SHORT).show();
             }
         });
 
     }
 
+
+
     private void initToolbar() {//создание тулбара
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        im = (ImageView) findViewById(R.id.backgrounToolbar);
-        Picasso.with(this).load(R.drawable.toolback).into(im);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -112,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
         });
         toolbar.inflateMenu(R.menu.menu);
     }
+
 
     private void initTabs() {//создание табов
         viewPager = (ViewPager) findViewById(R.id.viewPager);
@@ -122,20 +120,11 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
 
         //Add tabs icon with setIcon() or simple text with .setText()
-        tabLayout.getTabAt(0).setIcon(R.drawable.white_balance_sunny);
-        tabLayout.getTabAt(1).setIcon(R.drawable.snowflake);
-        tabLayout.getTabAt(1).setIcon(R.drawable.snowflake);
+        tabLayout.getTabAt(0).setText(R.string.tab_item_summer);
+        tabLayout.getTabAt(1).setText(R.string.tab_item_winter);
 
     }
 
-    private void initNavigationView() {//создание навигатион вью
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        //кнопочка для вызова бокового меню
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.view_navigation_open, R.string.view_navigation_close);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
-
-    }
 
     /*Метод для перехода и передачи данных на другое активити*/
     public static void start(Context context, int position, List<KickSummerDTO> data){//переход

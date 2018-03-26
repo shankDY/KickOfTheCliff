@@ -62,7 +62,7 @@ public class ScrollingActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.mapButton:
-                Intent intent=new Intent(this, MapsActivity.class);
+                Intent intent=new Intent(this, MapsActivity2.class);
                 intent.putExtra("latitude", 43.1056200);//передаем широту
                 intent.putExtra("longitude", 131.8735300);//передаем долготу
                 startActivity(intent);

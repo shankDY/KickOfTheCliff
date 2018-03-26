@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.success.kickofthecliff.MainActivity;
+import com.success.kickofthecliff.BottomActivities.HomeActivity;
 import com.success.kickofthecliff.R;
 import com.success.kickofthecliff.dto.KickWinterDTO;
 import com.squareup.picasso.Picasso;
@@ -78,7 +78,7 @@ public class KickListWinterAdapter  extends RecyclerView.Adapter<KickListWinterA
         //метод для взаимодействия с картами
         @Override
         public void onClick(View v) {
-            MainActivity.startWinter(v.getContext(), getAdapterPosition(), data);//переход
+            HomeActivity.startWinter(v.getContext(), getAdapterPosition(), data);//переход
             Log.d("RecyclerView", "Вы щёлкнули на позиции " + (getAdapterPosition() + 1));
         }
 

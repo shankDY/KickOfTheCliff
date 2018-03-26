@@ -4,8 +4,8 @@
     <dimen name="size_image">300dp</dimen>
     <dimen name="size_Cardimage">160dp</dimen>
     <dimen name="size_cardView">320dp</dimen>
-    <dimen name="cardElevation">8dp</dimen>
-    <dimen name="cardCornerRadius">8dp</dimen>
+    <dimen name="cardElevation">2dp</dimen>
+    <dimen name="cardCornerRadius">4dp</dimen>
     <dimen name="app_bar_height">300dp</dimen>
     <dimen name="text_margin">16dp</dimen>
     <dimen name="item_padding">16dp</dimen>

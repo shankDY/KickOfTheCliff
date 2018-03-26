@@ -1,76 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.v7.widget.CardView
+<android.support.v7.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/cardView"
+    android:layout_margin="16dp"
+    app:cardCornerRadius="@dimen/cardCornerRadius">
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/cardView"
-        card:cardElevation="@dimen/cardElevation"
-        card:cardCornerRadius="@dimen/cardCornerRadius"
-        card:cardUseCompatPadding="true">
-
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_Cardimage"
+            android:id="@+id/photo"
+            android:scaleType="centerCrop" />
         <LinearLayout
-            android:layout_width= "match_parent"
-            android:layout_height = "wrap_content"
-            android:orientation = "vertical">
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/size_Cardimage"
-                android:id="@+id/photo"
-                android:scaleType="centerCrop"
-                />
-
-        <LinearLayout
-            android:layout_width = "match_parent"
-            android:layout_height = "wrap_content"
-            android:orientation = "vertical"
-            android:padding = "16dp">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/title"
-                android:textSize="24sp"
-                android:textColor="#000"
-                android:paddingTop="24dp"/>
+                android:layout_marginBottom="8dp"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:singleLine="true"
                 android:id="@+id/textInfo"
                 android:textColor="#555"
-                />
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:scrollHorizontally="true"/>
         </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="8dp"
-
-                >
-
-                <ImageButton
-                    style="@android:style/Widget.Material.Light.ImageButton"
-                    android:layout_width="40dp"
-                    android:layout_height="wrap_content"
-                    android:elevation="4dp"
-                    android:src="@drawable/share_variant"
-                    android:theme="@style/PrimaryFlatButton" />
-
-                <ImageButton
-                    style="@android:style/Widget.Material.Light.ImageButton"
-                    android:layout_width="40dp"
-                    android:layout_height="wrap_content"
-                    android:elevation="4dp"
-                    android:src="@drawable/heart"
-                    android:theme="@style/PrimaryFlatButton" />
-            </LinearLayout>
-
+                android:text="@string/action_share"
+                android:theme="@style/PrimaryFlatButton" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/action_explore"
+                android:theme="@style/PrimaryFlatButton" />
         </LinearLayout>
-
-    </android.support.v7.widget.CardView>
-
-</LinearLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>
+</RelativeLayout>
